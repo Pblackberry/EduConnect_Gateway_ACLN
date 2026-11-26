@@ -52,3 +52,27 @@ services:
       - name: pagos-route
         paths: ["/api/pagos"]
         strip_path: true
+
+  - name: certificados-service
+    url: http://certificados:8000/certificados
+    plugins:
+      - name: key-auth
+        config:
+          key_names: ["X-API-Key"]
+          key_in_query: false
+          hide_credentials: true
+    routes:
+      - name: certificados-route
+        paths: ["/api/certificados"]
+        strip_path: true
+
+plugins:
+  - name: rate-limiting
+    consumer: socio-externo-demo
+    route: certificados-route
+    config:
+      minute: 2
+      limit_by: consumer
+      policy: local
+      fault_tolerant: true
+      hide_client_headers: false
