@@ -1,0 +1,10 @@
+services:
+  certificados:
+    build: .
+    container_name: certificados
+    ports: ["8004:8000"]   # quitar cuando entre Kong
+    networks: [educonnect]
+
+networks:
+  educonnect:
+    external: true

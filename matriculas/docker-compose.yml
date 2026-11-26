@@ -1,0 +1,10 @@
+services:
+  matriculas:
+    build: .
+    container_name: matriculas
+    ports: ["8002:8000"]   # quitar cuando entre Kong
+    networks: [educonnect]
+
+networks:
+  educonnect:
+    external: true

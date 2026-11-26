@@ -1,0 +1,10 @@
+services:
+  estudiantes:
+    build: .
+    container_name: estudiantes
+    ports: ["8001:8000"]   # quitar cuando entre Kong
+    networks: [educonnect]
+
+networks:
+  educonnect:
+    external: true

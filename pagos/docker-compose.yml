@@ -1,0 +1,10 @@
+services:
+  pagos:
+    build: .
+    container_name: pagos
+    ports: ["8003:8000"]   # quitar cuando entre Kong
+    networks: [educonnect]
+
+networks:
+  educonnect:
+    external: true
