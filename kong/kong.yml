@@ -1,0 +1,54 @@
+_format_version: "3.0"
+
+consumers:
+  - username: socio-externo-demo
+    keyauth_credentials: 
+      - key: demo-key-educonnect-2026
+    plugins:
+      - name: rate-limiting
+        config:
+          minute: 5
+          limit_by: consumer
+          policy: local
+          fault_tolerant: true
+          hide_client_headers: false
+
+services:
+  - name: estudiantes-service
+    url: http://estudiantes:8000/estudiantes
+    plugins:
+      - name: key-auth
+        config:
+          key_names: ["X-API-Key"]
+          key_in_query: false
+          hide_credentials: true
+    routes:
+      - name: estudiantes-route
+        paths: ["/api/estudiantes"]
+        strip_path: true
+
+  - name: matriculas-service
+    url: http://matriculas:8000/matriculas
+    plugins:
+      - name: key-auth
+        config:
+          key_names: ["X-API-Key"]
+          key_in_query: false
+          hide_credentials: true
+    routes:
+      - name: matriculas-route
+        paths: ["/api/matriculas"]
+        strip_path: true
+
+  - name: pagos-service
+    url: http://pagos:8000/pagos
+    plugins:
+      - name: key-auth
+        config:
+          key_names: ["X-API-Key"]
+          key_in_query: false
+          hide_credentials: true
+    routes:
+      - name: pagos-route
+        paths: ["/api/pagos"]
+        strip_path: true
