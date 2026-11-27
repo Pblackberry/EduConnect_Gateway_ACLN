@@ -124,7 +124,7 @@ Resultado esperado: `200` en las primeras 5 y `429` en la 6ª y 7ª. Cada respue
 
 ## 8. Pruebas con Postman
 
-Importa `tests/EduConnect.postman_collection.json`. Define las variables de colección `baseUrl` = `http://localhost:8000` y `apiKey` = `demo-key-educonnect-2026`.
+Importa `tests/EduConnect.postman_collection.json`. La URL y la API Key ficticia ya vienen configuradas en la coleccion. `baseUrl` = `http://localhost:8000` y `apiKey` = `demo-key-educonnect-2026`.
 
 | Carpeta | Esperado |
 |---|---|
