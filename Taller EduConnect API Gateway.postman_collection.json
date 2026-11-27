@@ -1,0 +1,757 @@
+{
+  "info": {
+    "_postman_id": "160eb104-4a17-49f9-bbcc-43be07653184",
+    "name": "Taller EduConnect API Gateway",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49234731",
+    "_collection_link": "https://go.postman.co/collection/49234731-160eb104-4a17-49f9-bbcc-43be07653184?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Positivas",
+      "item": [
+        {
+          "name": "ESTUDIANTES",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"Responde estudiantes\", () => pm.response.to.have.header(\"X-Servicio\", \"estudiantes\"));\r",
+                  "pm.test(\"Content-Type JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));\r",
+                  "pm.test(\"Body del servicio correcto\", () => pm.expect(pm.response.json().servicio).to.eql(\"estudiantes\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/estudiantes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "estudiantes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "MATRICULAS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"Responde matriculas\", () => pm.response.to.have.header(\"X-Servicio\", \"matriculas\"));\r",
+                  "pm.test(\"Content-Type JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));\r",
+                  "pm.test(\"Body del servicio correcto\", () => pm.expect(pm.response.json().servicio).to.eql(\"matriculas\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/matriculas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "matriculas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PAGOS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"Responde pagos\", () => pm.response.to.have.header(\"X-Servicio\", \"pagos\"));\r",
+                  "pm.test(\"Content-Type JSON\", () => pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\"));\r",
+                  "pm.test(\"Body del servicio correcto\", () => pm.expect(pm.response.json().servicio).to.eql(\"pagos\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/pagos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "pagos"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "AuthN",
+      "item": [
+        {
+          "name": "SIN_KEY",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 401\", () => pm.response.to.have.status(401));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/estudiantes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "estudiantes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "KEY_INCORRECTA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 401\", () => pm.response.to.have.status(401));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "value",
+                  "value": "estaesunakeydeejemplo",
+                  "type": "string"
+                },
+                {
+                  "key": "key",
+                  "value": "X-API-Key",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/estudiantes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "estudiantes"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "RutaNoRegistrada",
+      "item": [
+        {
+          "name": "NO_REGISTRADA",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 404\", () => pm.response.to.have.status(404));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/estudiante",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "estudiante"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "RateLimiting",
+      "item": [
+        {
+          "name": "01_ESTUDIANTES",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"Quedan 4 solicitudes\", () => pm.expect(pm.response.headers.get(\"X-RateLimit-Remaining-Minute\")).to.eql(\"4\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "const ms = (60 - new Date().getSeconds()) * 1000 + 2000;\r",
+                  "console.log(\"Esperando \" + ms + \" ms al próximo minuto\");\r",
+                  "setTimeout(() => {}, ms);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/estudiantes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "estudiantes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "02_ESTUDIANTES",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"Quedan 3 solicitudes\", () => pm.expect(pm.response.headers.get(\"X-RateLimit-Remaining-Minute\")).to.eql(\"3\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/estudiantes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "estudiantes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "03_MATRICULAS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"Quedan 2 solicitudes\", () => pm.expect(pm.response.headers.get(\"X-RateLimit-Remaining-Minute\")).to.eql(\"2\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/matriculas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "matriculas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "04_PAGOS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"Quedan 1 solicitudes\", () => pm.expect(pm.response.headers.get(\"X-RateLimit-Remaining-Minute\")).to.eql(\"1\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/pagos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "pagos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "05_ESTUDIANTES",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"Quedan 0 solicitudes\", () => pm.expect(pm.response.headers.get(\"X-RateLimit-Remaining-Minute\")).to.eql(\"0\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/estudiantes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "estudiantes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "06_MATRICULAS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 429\", () => pm.response.to.have.status(429));\r",
+                  "pm.test(\"Kong informa cuándo reintentar\", () => pm.response.to.have.header(\"Retry-After\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/matriculas",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "matriculas"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Corres esta carpeta de forma aislada para no comprometer el rate_limiting con las demás pruebas"
+    },
+    {
+      "name": "Certificados",
+      "item": [
+        {
+          "name": "01_CERTIFICADOS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"Responde certificados\", () => pm.expect(pm.response.json().servicio).to.eql(\"certificados\"));\r",
+                  "pm.test(\"Límite propio de 2/min\", () => pm.expect(pm.response.headers.get(\"X-RateLimit-Limit-Minute\")).to.eql(\"2\"));\r",
+                  "pm.test(\"Queda 1 solicitud\", () => pm.expect(pm.response.headers.get(\"X-RateLimit-Remaining-Minute\")).to.eql(\"1\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            },
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "const ms = (60 - new Date().getSeconds()) * 1000 + 2000;\r",
+                  "console.log(\"Esperando \" + ms + \" ms al próximo minuto\");\r",
+                  "setTimeout(() => {}, ms);"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/certificados",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "certificados"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "02_CERTIFICADOS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"No quedan solicitudes\", () => pm.expect(pm.response.headers.get(\"X-RateLimit-Remaining-Minute\")).to.eql(\"0\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/certificados",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "certificados"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "03_CERTIFICADOS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 429\", () => pm.response.to.have.status(429));\r",
+                  "pm.test(\"Kong informa cuándo reintentar\", () => pm.response.to.have.header(\"Retry-After\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/certificados",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "certificados"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "04_CERTIFICADOS",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 200\", () => pm.response.to.have.status(200));\r",
+                  "pm.test(\"Límite de 5/min, no el de certificados\", () => pm.expect(pm.response.headers.get(\"X-RateLimit-Limit-Minute\")).to.eql(\"5\"));\r",
+                  "pm.test(\"Cuota de estudiantes intacta\", () => pm.expect(pm.response.headers.get(\"X-RateLimit-Remaining-Minute\")).to.eql(\"4\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/certificados",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "certificados"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "05_CERTIFICADOS_SIN_KEY",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status 401\", () => pm.response.to.have.status(401));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "value",
+                  "value": "",
+                  "type": "string"
+                },
+                {
+                  "key": "key",
+                  "value": "X-API-Key",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/certificados",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "certificados"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "BackEndCaido",
+      "item": [
+        {
+          "name": "ESTUDIANTE_CAIDO",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Kong responde 5xx (backend no disponible)\", () => pm.expect(pm.response.code).to.be.within(500, 504));\r",
+                  "pm.test(\"El error lo genera Kong, no el backend\", () => pm.expect(pm.response.headers.get(\"Server\")).to.include(\"kong\"));"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8000/api/estudiantes",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "estudiantes"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "value",
+        "value": "demo-key-educonnect-2026",
+        "type": "string"
+      },
+      {
+        "key": "key",
+        "value": "X-API-Key",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
